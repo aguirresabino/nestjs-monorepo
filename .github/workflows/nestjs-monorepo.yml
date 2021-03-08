@@ -1,4 +1,4 @@
-name: ci-pipeline
+name: ci-nestjs-monorepo
 on: 
   push:
     branches: [main]
