@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "./apps/nestjs-monorepo"
+      - "apps/nestjs-monorepo"
 
 jobs:
   ci-pipeline:
