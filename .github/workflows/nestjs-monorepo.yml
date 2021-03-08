@@ -1,0 +1,57 @@
+name: ci-pipeline
+on: 
+  push:
+    branches: [main]
+    paths:
+      - "./apps/nestjs-monorepo"
+
+jobs:
+  ci-pipeline:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    
+    steps:
+      
+      - name: Copy Repository
+        uses: actions/checkout@v2
+      
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Check Lint
+        run: yarn lint
+
+      - name: Run Unit Tests
+        run: yarn test "./apps/nestjs-monorepo"
+
+      # - name: SonarCloud Scan
+      #   uses: sonarsource/sonarcloud-github-action@master
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      # - name: Login to docker hub
+      #   run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+      
+      # - name: Get the image version
+      #   id: imageVersion
+      #   run: echo ::set-output name=tag::$(echo ${GITHUB_SHA})
+
+      # - name: Build the tagged Docker image
+      #   run: docker build -t aguirresabino/profile-repository:${{steps.imageVersion.outputs.tag}} .
+
+      # - name: Push the tagged Docker image
+      #   run: docker push aguirresabino/profile-repository:${{steps.imageVersion.outputs.tag}}
+
+      # - name: Build the latest Docker image
+      #   run: docker build -t aguirresabino/profile-repository:latest .
+
+      # - name: Push the latest Docker image
+      #   run: docker push aguirresabino/profile-repository:latest
