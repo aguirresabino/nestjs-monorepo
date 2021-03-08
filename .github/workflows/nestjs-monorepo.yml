@@ -2,7 +2,7 @@ name: ci-nestjs-monorepo
 on: 
   push:
     paths:
-      - ./apps/nestjs-monorepo
+      - apps/nestjs-monorepo/**
     branches: 
       - main
 
