@@ -1,9 +1,9 @@
 name: ci-nestjs-monorepo
 on: 
   push:
-    branches: [main]
+    # branches: [main]
     paths:
-      - "apps/nestjs-monorepo"
+      - apps/nestjs-monorepo
 
 jobs:
   ci-pipeline:
