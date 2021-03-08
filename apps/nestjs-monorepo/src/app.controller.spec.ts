@@ -15,8 +15,8 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return "Hello, nestjs-monorepo!"', () => {
-      expect(appController.getHello()).toBe('Hello, nestjs-monorepo!');
+    it('should return "Hello, nestjs-monorepo!!"', () => {
+      expect(appController.getHello()).toBe('Hello, nestjs-monorepo!!');
     });
   });
 });
