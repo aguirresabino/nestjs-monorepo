@@ -23,20 +23,21 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           
-      - name: Install Dependencies
-        run: yarn install
+      # - name: Install Dependencies
+      #   run: yarn install
 
-      - name: Check Lint
-        run: yarn lint
+      # - name: Check Lint
+      #   run: yarn lint
 
-      - name: Run Unit Tests
-        run: yarn test "./apps/nestjs-monorepo"
+      # - name: Run Unit Tests
+      #   run: yarn test "./apps/nestjs-monorepo"
 
       - name: HTTP Request
         id: responseHTTP
         run: echo ::set-output name=response::$(curl --silent https://my-json-server.typicode.com/typicode/demo/posts | grep id)
 
-      - if: steps.responseHTTP.outputs.response == 'id\:/ 1, id\:/ 2, id\:/ 3'
+      - if: steps.responseHTTP.outputs.response != 'id\:/ 1, id\:/ 2, id\:/ 3'
+        run: exit 1
 
       - name: Echo response
         run: echo ${{steps.responseHTTP.outputs.response}}
