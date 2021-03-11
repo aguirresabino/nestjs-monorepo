@@ -36,6 +36,8 @@ jobs:
         id: responseHTTP
         run: echo ::set-output name=response::$(curl --silent https://my-json-server.typicode.com/typicode/demo/posts | grep id)
 
+      - if: steps.responseHTTP.outputs.response == 'id: 1, id: 2, id: 3'
+
       - name: Echo response
         run: echo ${{steps.responseHTTP.outputs.response}}
 
