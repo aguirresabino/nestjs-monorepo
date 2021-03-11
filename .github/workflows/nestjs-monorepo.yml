@@ -32,6 +32,13 @@ jobs:
       - name: Run Unit Tests
         run: yarn test "./apps/nestjs-monorepo"
 
+      - name: HTTP Request
+        id: responseHTTP
+        run: echo ::set-output name=response::$(curl --silent https://my-json-server.typicode.com/typicode/demo/posts | grep id)
+
+      - name: Echo response
+        run: echo ${{steps.responseHTTP.outputs.response}}
+
       # - name: SonarCloud Scan
       #   uses: sonarsource/sonarcloud-github-action@master
       #   env:
